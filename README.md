@@ -13,3 +13,7 @@ make p1_check:
 make p2_check:
 
 	only check p2
+
+make clean:
+
+	clean hw2test.o hw2test result(dir) p2_result(dir)
