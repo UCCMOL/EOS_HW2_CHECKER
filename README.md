@@ -22,4 +22,4 @@ make clean:
 
 ** and make sure you restart(reset the remaining seat) your server when you do check **
 
-run : ./<hw2test> <server_ip> <server_port>
+run : ./{hw2test} {server_ip} {server_port}
