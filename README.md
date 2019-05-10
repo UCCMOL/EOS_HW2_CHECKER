@@ -16,4 +16,8 @@ make p2_check:
 
 make clean:
 
-	clean hw2test.o hw2test result(dir) p2_result(dir)
+	rm hw2test.o hw2test result(dir) p2_result(dir)
+
+** please use console.txt and concert.txt to setup your server **
+
+** and make sure you restart(reset the remaining seat) your server when you do check **
