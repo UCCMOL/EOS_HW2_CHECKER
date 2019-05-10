@@ -21,3 +21,5 @@ make clean:
 ** please use console.txt and concert.txt to setup your server **
 
 ** and make sure you restart(reset the remaining seat) your server when you do check **
+
+run : ./<hw2test> <server_ip> <server_port>
