@@ -16,10 +16,10 @@ make p2_check:
 
 make clean:
 
-	rm hw2test.o hw2test result(dir) p2_result(dir)
+	rm hw3test.o hw3test hw3checker.o hw3checker result(dir) p2_result(dir)
 
 ** please use console.txt and concert.txt to setup your server **
 
 ** and make sure you restart(reset the remaining seat) your server when you do check **
 
-run : ./{hw2test} {server_ip} {server_port}
+run : ./{hw3test} {server_ip} {server_port}
