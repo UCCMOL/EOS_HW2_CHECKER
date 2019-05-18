@@ -1,12 +1,14 @@
 CC = g++
-TARGETS = hw2test
+TARGETS = hw3test hw3checker
 CFLAGS = -std=c++11
 
 all: $(TARGETS)
 	mkdir -p result
 	mkdir -p p2_result
 
-hw2test : hw2test.o
+hw3test : hw3test.o
+
+hw3checker : hw3checker.o
 
 .cpp.o:
 	$(CC) $(CFLAGS) -c -o $*.o $<
@@ -21,4 +23,4 @@ check_all: p1_check p2_check
 p1_check:
 	diff -qr result/ result_ans/
 p2_check:
-	diff -qr p2_result/ p2_result_ans/
+	./hw3checker
