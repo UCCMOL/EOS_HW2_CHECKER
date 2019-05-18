@@ -14,7 +14,7 @@ hw3checker : hw3checker.o
 	$(CC) $(CFLAGS) -c -o $*.o $<
 
 clean:
-	@rm -f $(TARGETS).o $(TARGETS)
+	rm -f *.o $(TARGETS)
 	@rm -fr result
 	@rm -fr p2_result
 
