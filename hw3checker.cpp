@@ -17,6 +17,7 @@ int main()
     string concertname,ticketname,ticketnumber,subticketnumber;
     int ticket_time;
     int i;
+	bool flag = false;
     for(i = 0 ; i < PROBLEM_2_CLIENTS_NUMBER ; i++)
     {
 		string filename = P2_FILE_PATH;
@@ -35,6 +36,7 @@ int main()
             subticketnumber = ticketnumber.substr(ticketname.length(),ticketnumber.length());
             if(tester[concertname][ticketname][ atoi(subticketnumber.c_str()) ]){
                 cout<<"at file = "<<filename<<" concert name = "<<concertname<<" , ticket class = "<<ticketname<<" , ticket number = "<<subticketnumber<<", is alread exist"<<endl;
+		flag = true;
                 //break;
             }
             else{
@@ -45,4 +47,11 @@ int main()
         cout<<filename<<"load finish"<<endl;
         file.close();
     }
+	if(flag){
+		cout<<"some tickets have been resold"<<endl;
+	}
+	else{
+		cout<<"p2 pass\n";
+	}
+	return 0;
 }
