@@ -62,7 +62,7 @@ int main()
 	}
 	else{
 		cout<<"p2 ticket not resold \n";
-		cout<<"let check weather every kind of ticket is from 0 to N in order\n";
+		cout<<"let check whether every kind of ticket is from 0 to N in order\n";
         
         map<string,map<string,map<int,int>>>::iterator it;
         map<string,map<int,int>>:: iterator it2;
