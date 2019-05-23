@@ -20,6 +20,8 @@
 #define RECV_MODE 0   // 0 = recv all , 1 = recv per line
 #define FILE_PATH "result/"
 #define P2_FILE_PATH "p2_result/"
+int onlyrun = -1;
+int onlyrun2 = -1;
 using namespace std;
 int make_connect(char*server_ip,char*server_port)
 {
@@ -203,6 +205,11 @@ int problem_2(char *server_ip,char*server_port)
 			dup2(filefd,STDOUT_FILENO);
 			dup2(filefd,STDERR_FILENO);
 			close(filefd);
+            if(onlyrun != -1 ){
+                if(i != onlyrun && i != onlyrun2){
+                    exit(1);
+                }
+            }
 			sockfd = make_connect(server_ip,server_port);
 			char recvBuffer[BUFFER_LENGTH] = {};
 			memset(recvBuffer,0,sizeof(recvBuffer));
@@ -215,6 +222,7 @@ int problem_2(char *server_ip,char*server_port)
 				write(sockfd,message.c_str(),message.length());
                 //sleep(1);
                 usleep( 20000 );
+				memset(recvBuffer,0,sizeof(recvBuffer));
 				if(RECV_MODE == 0){
 					if( (nbytes = recv(sockfd,recvBuffer,sizeof(recvBuffer),0)) <=0){
 						if(nbytes ==0){
@@ -252,7 +260,6 @@ int problem_2(char *server_ip,char*server_port)
 				if(check == "sorry,"){
 					break;
 				}
-				memset(recvBuffer,0,sizeof(recvBuffer));
 			}
 			message = "exit";
 			cout<<message<<endl;
@@ -282,6 +289,10 @@ int main(int argc,char*argv[])
 		printf("./{program} {server_ip} {server_port}\n");
 		exit(-1);
 	}
+    if(argc >= 4)
+        onlyrun = atoi(argv[3]);
+    if(argc >= 5)
+        onlyrun2 = atoi(argv[4]);
 	cout<<"==============START============"<<endl;
 	test_start(argv[1],argv[2]);
 	problem_2(argv[1],argv[2]);
