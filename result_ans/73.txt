@@ -1,3 +1,0 @@
-show con1
-con1 A 140000 B 140000 C 136606 D 148088 E 125005
-server leave

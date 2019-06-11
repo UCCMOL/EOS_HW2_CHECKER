@@ -1,3 +1,0 @@
-show not_exist_concert_name
-not_exist_concert_name not found
-server leave

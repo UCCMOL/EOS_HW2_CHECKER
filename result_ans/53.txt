@@ -1,3 +1,0 @@
-show con3
-con3 Koo 131234 Normal 120000 Rare 137655 Special 165464 Unique 112345
-server leave
