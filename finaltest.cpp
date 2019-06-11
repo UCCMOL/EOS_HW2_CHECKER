@@ -323,7 +323,7 @@ int main(int argc,char*argv[])
     if(argc >= 5)
         onlyrun2 = atoi(argv[4]);
 	cout<<"==============START============"<<endl;
-	test_start(argv[1],argv[2]);
+	//test_start(argv[1],argv[2]);
 	problem_2(argv[1],argv[2]);
 	pid_t wpid;
 	int status;
