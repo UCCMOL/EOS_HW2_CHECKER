@@ -18,7 +18,7 @@ clean:
 	@rm -fr result
 	@rm -fr p2_result
 
-check_all: p1_check p2_check
+check_all: p2_check
 	@for number in 1 2 3 4 5 6 7 8; do \
 		wc -l p2_result/$$number.txt ;\
 	done
