@@ -31,10 +31,13 @@ int main()
             exit(-1);
         }
         while(file>>concertname){
-            if(concertname == "sorry," || concertname == "exit"){
+            if(concertname == "sorry," || concertname == "exit" || concertname == "input"){
                 break;
             }
             file>>ticketname>>ticketnumber>>ticket_time;
+			if(ticketname == "not"){
+				break;
+			}
             subticketnumber = ticketnumber.substr(ticketname.length(),ticketnumber.length());
             if(tester[concertname][ticketname][ atoi(subticketnumber.c_str()) ]){
                 cout<<"at file = "<<filename<<" concert name = "<<concertname<<" , ticket class = "<<ticketname<<" , ticket number = "<<subticketnumber<<", is alread exist"<<endl;

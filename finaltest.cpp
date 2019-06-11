@@ -3,8 +3,10 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <string>
+#include <vector>
 #include <string.h>
 #include <stdlib.h>
+#include <time.h> 
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <sys/types.h>
@@ -13,7 +15,8 @@
 #include <sys/wait.h>
 #include <sstream>
 #define CONCERTS_NUM 3
-#define PROBLEM_2_CLIENTS_NUMBER 6
+#define PROBLEM_2_CLIENTS_NUMBER 8
+#define PROBLEM_2_CLIENTS_NUMBER_WAIT 6
 #define SEAT_CLASS_NUMBER 3
 #define CLIENTS_NUM 30
 #define BUFFER_LENGTH 4096*6
@@ -152,24 +155,30 @@ int test_start(char* server_ip , char* server_port)
 string make_message(int order)
 {
 	string response;
-	switch(order%6){
+	switch(order%PROBLEM_2_CLIENTS_NUMBER){
 		case 0:
-			response = "con1/A/400";
+			response = "con2/Normal/20 con3/Normal/40 con3/Rare/12 con2/Unique/18 con3/Koo/10";
 			return response;
 		case 1:
-			response = "con1/A/400";
+			response = "con2/Normal/20 con3/Normal/40 con3/Rare/12 con2/Unique/18 con3/Koo/10";
 			return response;
 		case 2:
-			response = "con1/D/77 con1/E/166";
+			response = "con1/D/30 con1/E/40 con2/Special/15 con3/Special/15";
 			return response;
 		case 3:
-			response = "con1/B/42";
+			response = "con1/B/50 con2/Rare/50";
 			return response;
 		case 4:
-			response = "con1/C/120 con1/D/123";
+			response = "con1/C/50 con1/D/50";
 			return response;
 		case 5:
-			response = "con1/B/10 con1/A/10";
+			response = "con1/B/50 con1/A/50";
+			return response;
+		case 6:
+			response = "Ho";
+			return response;
+		case 7:
+			response = "con1/A/1 con1/A/1 con1/A/1 con1/A/1 con1/A/1 con1/A/1 con1/A/1 con1/A/1 con1/A/1 con1/A/1 con1/A/1 con1/A/1 con1/A/1 con1/A/1 con1/A/1 con1/A/1 con1/A/1 con1/A/1 con6/D/10";
 			return response;
 		default:
 			return "LOL";
@@ -185,8 +194,12 @@ int problem_2(char *server_ip,char*server_port)
 	int filefd;
 	pid_t wpid;
 	int status;
+	vector<int> wait_children;
+	vector<int> kill_children;
+	srand(time(NULL));
+	int start = rand()%PROBLEM_2_CLIENTS_NUMBER;
     time_t t1,t2;
-	for(i = 0 ; i < PROBLEM_2_CLIENTS_NUMBER ; i++)
+	for(i = start ; i < start+PROBLEM_2_CLIENTS_NUMBER ; i++)
 	{
 		pid = fork();
 		if(pid == -1){
@@ -195,7 +208,7 @@ int problem_2(char *server_ip,char*server_port)
 		}
 		else if (pid == 0){
 			string filename = P2_FILE_PATH;
-			filename+= to_string(i+1);
+			filename+= to_string(i-start+1);
 			filename+=".txt";
 			filefd = open(filename.c_str(), O_WRONLY  | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
 			if(filefd < 0){
@@ -277,10 +290,26 @@ int problem_2(char *server_ip,char*server_port)
 		}
 		else{
 			cout<<"client number : "<<i<<"start booking"<<endl;
+			if( (i%PROBLEM_2_CLIENTS_NUMBER) < PROBLEM_2_CLIENTS_NUMBER_WAIT ){
+				wait_children.push_back(pid);
+			}
+			else{
+				kill_children.push_back(pid);
+			}
 		}
 		
 	}
-	while( (wpid = wait(&status)) >0);
+	//while( (wpid = wait(&status)) >0);
+	cout<<"wait children"<<endl;
+	for( j = 0 ; j < wait_children.size() ; j++)
+	{
+		while(waitpid(wait_children[j],NULL,0) >0);
+	}
+	cout<<"kill children"<<endl;
+	for(j = 0 ; j  < kill_children.size() ; j++)
+	{
+		kill(kill_children[j],SIGKILL);
+	}
 }
 int main(int argc,char*argv[])
 {
