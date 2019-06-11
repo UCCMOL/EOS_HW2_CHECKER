@@ -303,7 +303,10 @@ int problem_2(char *server_ip,char*server_port)
 	cout<<"wait children"<<endl;
 	for( j = 0 ; j < wait_children.size() ; j++)
 	{
-		while(waitpid(wait_children[j],NULL,0) >0);
+        //cout<<"j = "<<j<<endl;
+		while(waitpid(wait_children[j],NULL,0) >0)
+        {
+        }
 	}
 	cout<<"kill children"<<endl;
 	for(j = 0 ; j  < kill_children.size() ; j++)

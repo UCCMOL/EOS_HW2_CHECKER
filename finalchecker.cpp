@@ -38,6 +38,10 @@ int main()
 			if(ticketname == "not"){
 				break;
 			}
+            if(ticketname == "does"){
+                cout<<"format invalid\n"<<endl;
+                break;
+            }
             subticketnumber = ticketnumber.substr(ticketname.length(),ticketnumber.length());
             if(tester[concertname][ticketname][ atoi(subticketnumber.c_str()) ]){
                 cout<<"at file = "<<filename<<" concert name = "<<concertname<<" , ticket class = "<<ticketname<<" , ticket number = "<<subticketnumber<<", is alread exist"<<endl;
