@@ -4,7 +4,7 @@
 #include <map>
 #define FILE_PATH "result/"
 #define P2_FILE_PATH "p2_result/"
-#define PROBLEM_2_CLIENTS_NUMBER 6
+#define PROBLEM_2_CLIENTS_NUMBER 8
 using namespace std;
 int main()
 {
